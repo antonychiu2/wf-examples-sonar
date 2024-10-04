@@ -37,9 +37,9 @@ jobs:
         uses: mobb-dev/sonarqube-mobb-fixer-action@main
         with:
           mobb-api-token: ${{ secrets.MOBB_API_TOKEN }}
-          sonarqube-host-url: ${{ secrets.SONARQUBE_HOST_URL }}
-          sonarqube-project: ${{ secrets.SONARQUBE_PROJECT }}
+          sonarqube-host-url: ${{ vars.SONARQUBE_HOST_URL }}
+          sonarqube-project: ${{ vars.SONARQUBE_PROJECT }}
           sonarqube-token: ${{ secrets.SONARQUBE_TOKEN }}
-          sonarqube-org: ${{ secrets.SONARQUBE_ORG }}
+          sonarqube-org: ${{ vars.SONARQUBE_ORG }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           
