@@ -78,9 +78,10 @@ jobs:
         if: always()
         uses: mobb-dev/sonarqube-mobb-fixer-action@main
         with:
-          api-key: ${{ secrets.MOBB_API_TOKEN }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          mobb-api-token: ${{ secrets.MOBB_API_TOKEN }}
           sonarqube-host-url: ${{ secrets.SONARQUBE_HOST_URL }}
           sonarqube-project: ${{ secrets.SONARQUBE_PROJECT }}
           sonarqube-token: ${{ secrets.SONARQUBE_TOKEN }}
           sonarqube-org: ${{ secrets.SONARQUBE_ORG }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          
