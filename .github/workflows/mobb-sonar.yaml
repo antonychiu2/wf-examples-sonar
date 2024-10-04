@@ -58,6 +58,7 @@ jobs:
 
       - name: Run SonarQube SAST scan
         run: |
+          echo "Branch is: $BRANCH"
           mvn clean verify sonar:sonar \
             -Dsonar.host.url=${{ secrets.SONARQUBE_HOST_URL }} \
             -Dsonar.projectKey=${{ secrets.SONARQUBE_PROJECT }} \
