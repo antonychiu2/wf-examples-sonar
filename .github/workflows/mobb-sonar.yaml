@@ -64,10 +64,10 @@ jobs:
       - name: Run SonarQube SAST scan
         run: |
           mvn clean verify sonar:sonar \
-            -Dsonar.host.url=${{ secrets.SONARQUBE_HOST_URL }} \
-            -Dsonar.projectKey=${{ secrets.SONARQUBE_PROJECT }} \
+            -Dsonar.host.url=${{ var.SONARQUBE_HOST_URL }} \
+            -Dsonar.projectKey=${{ var.SONARQUBE_PROJECT }} \
             -Dsonar.token=${{ secrets.SONARQUBE_TOKEN }} \
-            -Dsonar.organization=${{ secrets.SONARQUBE_ORG }} \
+            -Dsonar.organization=${{ var.SONARQUBE_ORG }} \
             -Dsonar.branch.name="$BRANCH" \
             -Dsonar.qualitygate.wait=true \
             -Dsonar.java.skipUnchanged=false
@@ -75,10 +75,10 @@ jobs:
       - name: Export SonarQube report
         if: always()
         run: |
-          SONARQUBE_HOST_URL=${{ secrets.SONARQUBE_HOST_URL }} \
-          SONARQUBE_PROJECT=${{ secrets.SONARQUBE_PROJECT }} \
+          SONARQUBE_HOST_URL=${{ var.SONARQUBE_HOST_URL }} \
+          SONARQUBE_PROJECT=${{ var.SONARQUBE_PROJECT }} \
           SONARQUBE_TOKEN=${{ secrets.SONARQUBE_TOKEN }} \
-          SONARQUBE_ORG=${{ secrets.SONARQUBE_ORG }} \
+          SONARQUBE_ORG=${{ var.SONARQUBE_ORG }} \
           BRANCH="$BRANCH" \
           REPORT_PATH=report.json \
           python .github/scripts/sonarqube_download_report.py
