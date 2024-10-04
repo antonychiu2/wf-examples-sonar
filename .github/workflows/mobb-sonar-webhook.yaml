@@ -34,7 +34,7 @@ jobs:
       #   uses: actions/checkout@v3
       - name: Run Mobb on the findings and get fixes
         if: always()
-        uses: mobb-dev/sonarqube-mobb-fixer-action@main
+        uses: mobb-dev/sonarqube-mobb-fixer-action@v1.0
         with:
           mobb-api-token: ${{ secrets.MOBB_API_TOKEN }}
           sonarqube-host-url: ${{ vars.SONARQUBE_HOST_URL }}
