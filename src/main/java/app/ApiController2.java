@@ -28,7 +28,11 @@ public class ApiController {
         String query = "SELECT user FROM users WHERE user = '" + user + "'";
 
         try (Statement statement = connection.createStatement()) {
-
+            ResultSet resultSet = statement.executeQuery(query);
+            if (!resultSet.next()) {
+                return new ResponseEntity<>("Unauthorized", HttpStatus.UNAUTHORIZED);
+            }
+            
         }
 
         return new ResponseEntity<>("Authentication Success", HttpStatus.OK);
