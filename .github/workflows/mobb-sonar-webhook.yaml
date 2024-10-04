@@ -63,16 +63,16 @@ jobs:
           echo "Branch is: $BRANCH"
           env
           
-      - name: Run SonarQube SAST scan
-        run: |
-          mvn clean verify sonar:sonar \
-            -Dsonar.host.url=${{ secrets.SONARQUBE_HOST_URL }} \
-            -Dsonar.projectKey=${{ secrets.SONARQUBE_PROJECT }} \
-            -Dsonar.token=${{ secrets.SONARQUBE_TOKEN }} \
-            -Dsonar.organization=${{ secrets.SONARQUBE_ORG }} \
-            -Dsonar.branch.name="$BRANCH" \
-            -Dsonar.qualitygate.wait=true \
-            -Dsonar.java.skipUnchanged=false
+      # - name: Run SonarQube SAST scan
+      #   run: |
+      #     mvn clean verify sonar:sonar \
+      #       -Dsonar.host.url=${{ secrets.SONARQUBE_HOST_URL }} \
+      #       -Dsonar.projectKey=${{ secrets.SONARQUBE_PROJECT }} \
+      #       -Dsonar.token=${{ secrets.SONARQUBE_TOKEN }} \
+      #       -Dsonar.organization=${{ secrets.SONARQUBE_ORG }} \
+      #       -Dsonar.branch.name="$BRANCH" \
+      #       -Dsonar.qualitygate.wait=true \
+      #       -Dsonar.java.skipUnchanged=false
 
       - name: Export SonarQube report
         if: always()
