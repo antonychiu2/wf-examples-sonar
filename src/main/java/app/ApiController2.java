@@ -25,11 +25,7 @@ public class ApiController {
     @ResponseBody
     public ResponseEntity<String> authenticate(
             @RequestParam("user") String user) throws SQLException {
-        String query = "SELECT user FROM users WHERE user = '" + user + "'";
-
-        try (Statement statement = connection.createStatement()) {
-
-        }
+        
 
         return new ResponseEntity<>("Authentication Success", HttpStatus.OK);
     }
