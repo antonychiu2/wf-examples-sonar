@@ -26,16 +26,16 @@ public class ApiController {
     public ResponseEntity<String> authenticate(
             @RequestParam("user") String user) throws SQLException {
 
-        // String query = "SELECT user FROM users WHERE user = '" + user + "'";
+        String query = "SELECT user FROM users WHERE user = '" + user + "'";
 
-        // try (Statement statement = connection.createStatement()) {
+        try (Statement statement = connection.createStatement()) {
 
-        //     ResultSet resultSet = statement.executeQuery(query);
+            ResultSet resultSet = statement.executeQuery(query);
 
-        //     if (!resultSet.next()) {
-        //         return new ResponseEntity<>("Unauthorized", HttpStatus.UNAUTHORIZED);
-        //     }
-        // }
+            if (!resultSet.next()) {
+                return new ResponseEntity<>("Unauthorized", HttpStatus.UNAUTHORIZED);
+            }
+        }
 
         return new ResponseEntity<>("Authentication Success", HttpStatus.OK);
     }
