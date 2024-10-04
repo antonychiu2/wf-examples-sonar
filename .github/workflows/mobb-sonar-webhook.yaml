@@ -30,8 +30,8 @@ jobs:
     env:
       BRANCH: ${{ github.head_ref || github.ref_name }}
     steps:
-      - name: Checkout repo to get code
-        uses: actions/checkout@v3
+      # - name: Checkout repo to get code
+      #   uses: actions/checkout@v3
       - name: Run Mobb on the findings and get fixes
         if: always()
         uses: mobb-dev/sonarqube-mobb-fixer-action@main
