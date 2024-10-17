@@ -26,16 +26,25 @@ public class ApiController {
     public ResponseEntity<String> authenticate(
             @RequestParam("user") String user) throws SQLException {
 
-        // String query = "SELECT user FROM users WHERE user = '" + user + "'";
+        String query = "SELECT user FROM users WHERE user = '?'";
 
-        // try (Statement statement = connection.createStatement()) {
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
 
-        //     ResultSet resultSet = statement.executeQuery(query);
+            try {
+                statement.setInt(1, Math.round(Float.parseFloat(user)));
+            } catch (NumberFormatException e) {
+                // MOBB: consider printing this message to logger: mobb-77deb6d83cc4f80b44f2a942cb026c6d: Failed to convert input to type integer
 
-        //     if (!resultSet.next()) {
-        //         return new ResponseEntity<>("Unauthorized", HttpStatus.UNAUTHORIZED);
-        //     }
-        // }
+                // MOBB: using a default value for the SQL parameter in case the input is not convertible.
+                // This is important for preventing users from causing a denial of service to this application by throwing an exception here.
+                statement.setInt(1, 0);
+            }
+            ResultSet resultSet = statement.executeQuery();
+
+            if (!resultSet.next()) {
+                return new ResponseEntity<>("Unauthorized", HttpStatus.UNAUTHORIZED);
+            }
+        }
 
         return new ResponseEntity<>("Authentication Success", HttpStatus.OK);
     }
